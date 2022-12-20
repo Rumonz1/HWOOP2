@@ -1,7 +1,5 @@
 package transport;
 
-import java.time.LocalDate;
-
 public class Автомобиль {
     private final String brand;
     private final String model;
@@ -15,9 +13,10 @@ public class Автомобиль {
     private String registrationNumber;
     private final int seatsNumber;
     private boolean summerWheels;
+    private Key key;
 
 
-    public Автомобиль(String brand, String model, int year, String country, String color, double engineVolume) {
+    public Автомобиль(String brand, String model, int year, String country, String color, double engineVolume, Key key) {
         if (brand  == null || brand.isEmpty() || brand.isBlank()) {
             this.brand = "default";} else {
             this.brand =brand;
@@ -40,6 +39,10 @@ public class Автомобиль {
             this.year = 2000;
         }else {
             this.year = year;
+        }
+        if (key == null){
+            this.key = new Key();}else {
+            this.key = key;
         }
         this.transmission = "АКП";
         this.registrationNumber = "х000хх000";
@@ -67,6 +70,14 @@ public class Автомобиль {
         }
         return true;
 
+    }
+
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
     }
 
     public String getBrand() {
@@ -140,4 +151,27 @@ public class Автомобиль {
     public void setSummerWheels(boolean summerWheels) {
         this.summerWheels = summerWheels;
     }
+    public static class Key {
+        private final boolean remoteRunEngine;
+        private final boolean withoutKeyAccess;
+
+        public Key (boolean remoteRunEngine, boolean withoutKeyAccess) {
+            this.remoteRunEngine = remoteRunEngine;
+            this.withoutKeyAccess = withoutKeyAccess;
+
+        }
+
+        public Key() {
+            this(false, false);
+        }
+
+        public boolean isRemoteRunEngine() {
+            return remoteRunEngine;
+        }
+
+        public boolean isWithoutKeyAccess() {
+            return withoutKeyAccess;
+        }
+    }
+
 }
